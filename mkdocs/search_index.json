@@ -2,48 +2,198 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to MkDocs\n\n\nFor full documentation visit \nmkdocs.org\n.\n\n\nCommands\n\n\n\n\nmkdocs new [dir-name]\n - Create a new project.\n\n\nmkdocs serve\n - Start the live-reloading docs server.\n\n\nmkdocs build\n - Build the documentation site.\n\n\nmkdocs help\n - Print this help message.\n\n\n\n\nProject layout\n\n\nmkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
+            "text": "Welcome to Configurapi\n\n\nConfigurapi is a configurable, event-driven API framework for rapid API developments.\n\n\nInstall\n\n\nnpm install -g configurapi-handler-http configurapi-runner-self\n\n\nConfigure\n\n\nConfig.yaml\n\n\nimport:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi ${hello}!\n\n\n\nRun\n\n\n./configurapi-runner-self\n\n\nTest\n\n\n$ curl http://localhost:8080/v1/hello/world\n\nHi world!\n\n\n\n\n\nLearn more\n\n\nWant to learn more?  Check out \nGetting Started", 
             "title": "Home"
         }, 
         {
-            "location": "/#welcome-to-mkdocs", 
-            "text": "For full documentation visit  mkdocs.org .", 
-            "title": "Welcome to MkDocs"
+            "location": "/#welcome-to-configurapi", 
+            "text": "Configurapi is a configurable, event-driven API framework for rapid API developments.", 
+            "title": "Welcome to Configurapi"
         }, 
         {
-            "location": "/#commands", 
-            "text": "mkdocs new [dir-name]  - Create a new project.  mkdocs serve  - Start the live-reloading docs server.  mkdocs build  - Build the documentation site.  mkdocs help  - Print this help message.", 
-            "title": "Commands"
+            "location": "/#install", 
+            "text": "npm install -g configurapi-handler-http configurapi-runner-self", 
+            "title": "Install"
         }, 
         {
-            "location": "/#project-layout", 
-            "text": "mkdocs.yml    # The configuration file.\ndocs/\n    index.md  # The documentation homepage.\n    ...       # Other markdown pages, images and other files.", 
-            "title": "Project layout"
+            "location": "/#configure", 
+            "text": "Config.yaml  import:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi ${hello}!", 
+            "title": "Configure"
         }, 
         {
-            "location": "/about/", 
-            "text": "Iterumque vestem mente\n\n\nTulit ut illa quod per Charybdin vestra\n\n\nLorem markdownum suscipiunt lumina, illa manus destinat moenibus veniam\npostquam, illa Luna obicit prece semper. Vix mea dixit frusta; sum manu\n\nhabitavit\n ad mittat aethere fluminis posset sententia pudibunda ille gratus\ndea laeva manu? Ait in vultus puerile, illis petisset properas quoque et passus;\nmodo sacra.\n\n\nExanimis vulgus crimine arduus, in bracchia unus, edax flet tendit Peleus, ulla.\nFigentem laborem vulnere, ut dicere cecidere et perque Coei quid Inachus, abibat\nfiducia videtur, aut Medusae. Reminiscitur copia. Receptis ductus que accede\ninpune procubuit venis retinentibus vasto dilectus; tellus cupiuntque visurus\ndiscedite in.\n\n\nNec Parnaside magis\n\n\nCrescit stabat. Coma hostem feci! Nonacrinas nunc.\n\n\n\n\nRamo ara: iuga sed! Suntque sive: trepidat: matris ait commisit motus\nceleberrima caret nec satis Anchisae germana omnipotens cum est. Pararet ergo\nterrarum. Et dea ut \nrectorque stratis praecorrupta\n neque nisi tunc Pomona\nquas desiluit, sine resque acta apparuit. Subitis infamia, cacumina supplex\nquod forma auribus utque; aesculeae udaeque omnique et.\n\n\n\n\nEt adlevat hasta se adflati ponti et\n\n\nNorant nata quantum scelus. Auras consequitur natant, bis hostia; parte viae\nFinierat, si esse sanguinis tollit inmotos ignes, Caune. Nec nec omnes pariter\nferarum. Et Daedalus verbis? Ipse telae, doceo vaticinos suorum relinquit dant\nrepperit miserande, sine \nconiunx\n, se\nversabat sumere.\n\n\nEt victa inpulsas qualia vultus ego concretam pressa nec \ndiscedite glaebis\narboribus\n infelicem modo. Resecare erat Mavortis magnum, umet diu continet\nmagis erat. Templa dicere petendo inpluit \nerant mortale nymphe\n Ismenis: sed\nanimas taurum oceano et \nqui valebant\n Bisaltida vestrum? Cogeris nostro\ngaudet pectora et ita sanguine memoremque pectora de volucrum materiam esse,\n\nhoc\n dea meae. Dies accepta dei rotatum vidit genialiter Lucifer concipe\noculis currum nemorum rupit, et mutare, sensit.\n\n\n\n\nDedit urbis\n\n\nIllas vix conchas restitit longae ruricolae scelerato\n\n\nMeae quo mitius\n\n\nFeret caperet Neptune pacalibus audete ferro\n\n\nSibi ferinis\n\n\n\n\nVera hac discite altae recubare Cinyrae diversa et ducibus agmine releguntque\nperque. Emi ambibat tenues, constitit figit duri qui formam, pulsat \naequoris\nnatus velociter\n est illa huic haesura et ebur. Vix qua\ncandidus luna teque rata, esse haec Corythi verbis Ixione quem fruges perpetiar,\nper invenit. Incognita virgo rogatque, sum, Byblis, indignantia \nmedicata\nfortes\n, ferarum possumus, si summis.", 
-            "title": "About"
+            "location": "/#run", 
+            "text": "./configurapi-runner-self", 
+            "title": "Run"
         }, 
         {
-            "location": "/about/#iterumque-vestem-mente", 
+            "location": "/#test", 
+            "text": "$ curl http://localhost:8080/v1/hello/world\n\nHi world!", 
+            "title": "Test"
+        }, 
+        {
+            "location": "/#learn-more", 
+            "text": "Want to learn more?  Check out  Getting Started", 
+            "title": "Learn more"
+        }, 
+        {
+            "location": "/start/", 
+            "text": "Getting Started\n\n\nOverview\n\n\nInstallation\n\n\nConfig file\n\n\nYour first API route\n\n\nGet data from request payloads\n\n\nReturn responses\n\n\nError handling\n\n\nWhat's next?", 
+            "title": "Getting Started"
+        }, 
+        {
+            "location": "/start/#getting-started", 
             "text": "", 
-            "title": "Iterumque vestem mente"
+            "title": "Getting Started"
         }, 
         {
-            "location": "/about/#tulit-ut-illa-quod-per-charybdin-vestra", 
-            "text": "Lorem markdownum suscipiunt lumina, illa manus destinat moenibus veniam\npostquam, illa Luna obicit prece semper. Vix mea dixit frusta; sum manu habitavit  ad mittat aethere fluminis posset sententia pudibunda ille gratus\ndea laeva manu? Ait in vultus puerile, illis petisset properas quoque et passus;\nmodo sacra.  Exanimis vulgus crimine arduus, in bracchia unus, edax flet tendit Peleus, ulla.\nFigentem laborem vulnere, ut dicere cecidere et perque Coei quid Inachus, abibat\nfiducia videtur, aut Medusae. Reminiscitur copia. Receptis ductus que accede\ninpune procubuit venis retinentibus vasto dilectus; tellus cupiuntque visurus\ndiscedite in.", 
-            "title": "Tulit ut illa quod per Charybdin vestra"
+            "location": "/start/#overview", 
+            "text": "", 
+            "title": "Overview"
         }, 
         {
-            "location": "/about/#nec-parnaside-magis", 
-            "text": "Crescit stabat. Coma hostem feci! Nonacrinas nunc.   Ramo ara: iuga sed! Suntque sive: trepidat: matris ait commisit motus\nceleberrima caret nec satis Anchisae germana omnipotens cum est. Pararet ergo\nterrarum. Et dea ut  rectorque stratis praecorrupta  neque nisi tunc Pomona\nquas desiluit, sine resque acta apparuit. Subitis infamia, cacumina supplex\nquod forma auribus utque; aesculeae udaeque omnique et.", 
-            "title": "Nec Parnaside magis"
+            "location": "/start/#installation", 
+            "text": "", 
+            "title": "Installation"
         }, 
         {
-            "location": "/about/#et-adlevat-hasta-se-adflati-ponti-et", 
-            "text": "Norant nata quantum scelus. Auras consequitur natant, bis hostia; parte viae\nFinierat, si esse sanguinis tollit inmotos ignes, Caune. Nec nec omnes pariter\nferarum. Et Daedalus verbis? Ipse telae, doceo vaticinos suorum relinquit dant\nrepperit miserande, sine  coniunx , se\nversabat sumere.  Et victa inpulsas qualia vultus ego concretam pressa nec  discedite glaebis\narboribus  infelicem modo. Resecare erat Mavortis magnum, umet diu continet\nmagis erat. Templa dicere petendo inpluit  erant mortale nymphe  Ismenis: sed\nanimas taurum oceano et  qui valebant  Bisaltida vestrum? Cogeris nostro\ngaudet pectora et ita sanguine memoremque pectora de volucrum materiam esse, hoc  dea meae. Dies accepta dei rotatum vidit genialiter Lucifer concipe\noculis currum nemorum rupit, et mutare, sensit.   Dedit urbis  Illas vix conchas restitit longae ruricolae scelerato  Meae quo mitius  Feret caperet Neptune pacalibus audete ferro  Sibi ferinis   Vera hac discite altae recubare Cinyrae diversa et ducibus agmine releguntque\nperque. Emi ambibat tenues, constitit figit duri qui formam, pulsat  aequoris\nnatus velociter  est illa huic haesura et ebur. Vix qua\ncandidus luna teque rata, esse haec Corythi verbis Ixione quem fruges perpetiar,\nper invenit. Incognita virgo rogatque, sum, Byblis, indignantia  medicata\nfortes , ferarum possumus, si summis.", 
-            "title": "Et adlevat hasta se adflati ponti et"
+            "location": "/start/#config-file", 
+            "text": "", 
+            "title": "Config file"
+        }, 
+        {
+            "location": "/start/#your-first-api-route", 
+            "text": "", 
+            "title": "Your first API route"
+        }, 
+        {
+            "location": "/start/#get-data-from-request-payloads", 
+            "text": "", 
+            "title": "Get data from request payloads"
+        }, 
+        {
+            "location": "/start/#return-responses", 
+            "text": "", 
+            "title": "Return responses"
+        }, 
+        {
+            "location": "/start/#error-handling", 
+            "text": "", 
+            "title": "Error handling"
+        }, 
+        {
+            "location": "/start/#whats-next", 
+            "text": "", 
+            "title": "What's next?"
+        }, 
+        {
+            "location": "/standard_handlers/", 
+            "text": "Standard Handlers\n\n\nUsing standard handlers\n\n\nHTTP\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-http\n\n\nSetResponseBodyHandler\n\n\nSetResponseHandler\n\n\nSetResponseHeaderHandler\n\n\nSetResponseStatusCodeHandler\n\n\nJSON\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-json\n\n\nSetJsonResponseHandler\n\n\nValidateJsonRequestHandler", 
+            "title": "Standard Handlers"
+        }, 
+        {
+            "location": "/standard_handlers/#standard-handlers", 
+            "text": "", 
+            "title": "Standard Handlers"
+        }, 
+        {
+            "location": "/standard_handlers/#using-standard-handlers", 
+            "text": "", 
+            "title": "Using standard handlers"
+        }, 
+        {
+            "location": "/standard_handlers/#http", 
+            "text": "Source :  GitHub  Package :  configurapi-handler-http", 
+            "title": "HTTP"
+        }, 
+        {
+            "location": "/standard_handlers/#setresponsebodyhandler", 
+            "text": "", 
+            "title": "SetResponseBodyHandler"
+        }, 
+        {
+            "location": "/standard_handlers/#setresponsehandler", 
+            "text": "", 
+            "title": "SetResponseHandler"
+        }, 
+        {
+            "location": "/standard_handlers/#setresponseheaderhandler", 
+            "text": "", 
+            "title": "SetResponseHeaderHandler"
+        }, 
+        {
+            "location": "/standard_handlers/#setresponsestatuscodehandler", 
+            "text": "", 
+            "title": "SetResponseStatusCodeHandler"
+        }, 
+        {
+            "location": "/standard_handlers/#json", 
+            "text": "Source :  GitHub  Package :  configurapi-handler-json", 
+            "title": "JSON"
+        }, 
+        {
+            "location": "/standard_handlers/#setjsonresponsehandler", 
+            "text": "", 
+            "title": "SetJsonResponseHandler"
+        }, 
+        {
+            "location": "/standard_handlers/#validatejsonrequesthandler", 
+            "text": "", 
+            "title": "ValidateJsonRequestHandler"
+        }, 
+        {
+            "location": "/custom_handlers/", 
+            "text": "Adding your own handlers\n\n\nSynchronous handlers\n\n\nAsynchronous handlers\n\n\nPromise\n\n\nAsync/Await", 
+            "title": "Custom Handlers"
+        }, 
+        {
+            "location": "/custom_handlers/#adding-your-own-handlers", 
+            "text": "", 
+            "title": "Adding your own handlers"
+        }, 
+        {
+            "location": "/custom_handlers/#synchronous-handlers", 
+            "text": "", 
+            "title": "Synchronous handlers"
+        }, 
+        {
+            "location": "/custom_handlers/#asynchronous-handlers", 
+            "text": "", 
+            "title": "Asynchronous handlers"
+        }, 
+        {
+            "location": "/custom_handlers/#promise", 
+            "text": "", 
+            "title": "Promise"
+        }, 
+        {
+            "location": "/custom_handlers/#asyncawait", 
+            "text": "", 
+            "title": "Async/Await"
+        }, 
+        {
+            "location": "/runner/", 
+            "text": "Runner\n\n\nNode\n\n\nAWS Lambda\n\n\nAzure Function", 
+            "title": "Runner"
+        }, 
+        {
+            "location": "/runner/#runner", 
+            "text": "", 
+            "title": "Runner"
+        }, 
+        {
+            "location": "/runner/#node", 
+            "text": "", 
+            "title": "Node"
+        }, 
+        {
+            "location": "/runner/#aws-lambda", 
+            "text": "", 
+            "title": "AWS Lambda"
+        }, 
+        {
+            "location": "/runner/#azure-function", 
+            "text": "", 
+            "title": "Azure Function"
         }
     ]
 }
