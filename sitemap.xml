@@ -4,7 +4,7 @@
     
     <url>
      <loc>/</loc>
-     <lastmod>2017-05-05</lastmod>
+     <lastmod>2017-05-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -12,23 +12,39 @@
     
     <url>
      <loc>/start/</loc>
-     <lastmod>2017-05-05</lastmod>
+     <lastmod>2017-05-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/standard_handlers/</loc>
-     <lastmod>2017-05-05</lastmod>
+     <loc>/event/</loc>
+     <lastmod>2017-05-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
 
     
     <url>
-     <loc>/custom_handlers/</loc>
-     <lastmod>2017-05-05</lastmod>
+     <loc>/handlers/standard/</loc>
+     <lastmod>2017-05-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/handlers/custom/</loc>
+     <lastmod>2017-05-18</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    
+
+    
+    <url>
+     <loc>/error/</loc>
+     <lastmod>2017-05-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     
@@ -36,7 +52,7 @@
     
     <url>
      <loc>/runner/</loc>
-     <lastmod>2017-05-05</lastmod>
+     <lastmod>2017-05-18</lastmod>
      <changefreq>daily</changefreq>
     </url>
     

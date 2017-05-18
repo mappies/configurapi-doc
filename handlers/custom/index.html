@@ -1,0 +1,734 @@
+
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      
+      <meta name="generator" content="mkdocs-0.16.3, mkdocs-material-1.6.1">
+    
+    
+      
+        <title>Custom Handlers - Configurapi</title>
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr-56ade86843.js"></script>
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application-4d0d3f2fbf.css">
+      
+    
+    
+      
+        
+        
+        
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700|Roboto+Mono">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+      <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    
+    
+    
+  </head>
+  
+  
+  
+  
+    <body>
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="drawer">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="search">
+    <label class="md-overlay" data-md-component="overlay" for="drawer"></label>
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <a href="../.." title="Configurapi" class="md-icon md-icon--home md-header-nav__button">
+          </a>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <span class="md-flex__ellipsis md-header-nav__title">
+          
+            
+              
+            
+            Custom Handlers
+          
+        </span>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="search"></label>
+          
+<div class="md-search" data-md-component="search">
+  <label class="md-search__overlay" for="search"></label>
+  <div class="md-search__inner">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" required placeholder="Search" accesskey="s" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query">
+      <label class="md-icon md-search__icon" for="search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset">close</button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta" data-md-lang-result-none="No matching documents" data-md-lang-result-one="1 matching document" data-md-lang-result-other="# matching documents">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <div class="md-header-nav__source">
+          
+        </div>
+      </div>
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+      
+      <main class="md-main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="drawer">
+    
+      <i class="md-icon md-icon--home md-nav__button"></i>
+    
+    Configurapi
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../start/" title="Getting Started" class="md-nav__link">
+      Getting Started
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../event/" title="Event" class="md-nav__link">
+      Event
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../standard/" title="Standard Handlers" class="md-nav__link">
+      Standard Handlers
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="toc">
+        Custom Handlers
+      </label>
+    
+    <a href="./" title="Custom Handlers" class="md-nav__link md-nav__link--active">
+      Custom Handlers
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adding-your-own-handlers" title="Adding your own handlers" class="md-nav__link">
+    Adding your own handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jsonresponse" title="JsonResponse" class="md-nav__link">
+    JsonResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listresponse" title="ListResponse" class="md-nav__link">
+    ListResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errorresponse" title="ErrorResponse" class="md-nav__link">
+    ErrorResponse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronous-handlers" title="Synchronous handlers" class="md-nav__link">
+    Synchronous handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asynchronous-handlers" title="Asynchronous handlers" class="md-nav__link">
+    Asynchronous handlers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#callback" title="Callback" class="md-nav__link">
+    Callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise" title="Promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asyncawait" title="Async/Await" class="md-nav__link">
+    Async/Await
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../error/" title="Error Handling" class="md-nav__link">
+      Error Handling
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../runner/" title="Runner" class="md-nav__link">
+      Runner
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+  
+    <label class="md-nav__title" for="toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#adding-your-own-handlers" title="Adding your own handlers" class="md-nav__link">
+    Adding your own handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#response" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#response_1" title="Response" class="md-nav__link">
+    Response
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#jsonresponse" title="JsonResponse" class="md-nav__link">
+    JsonResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#listresponse" title="ListResponse" class="md-nav__link">
+    ListResponse
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#errorresponse" title="ErrorResponse" class="md-nav__link">
+    ErrorResponse
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#synchronous-handlers" title="Synchronous handlers" class="md-nav__link">
+    Synchronous handlers
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#asynchronous-handlers" title="Asynchronous handlers" class="md-nav__link">
+    Asynchronous handlers
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#callback" title="Callback" class="md-nav__link">
+    Callback
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#promise" title="Promise" class="md-nav__link">
+    Promise
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#asyncawait" title="Async/Await" class="md-nav__link">
+    Async/Await
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Custom Handlers</h1>
+                
+                <p>You can add your own handlers to process complex logics.  In this section, we will learn how to add your own custom handlers.</p>
+<h2 id="adding-your-own-handlers">Adding your own handlers</h2>
+<p>A handler is a function defined in a JavaScript or TypeScript file.  The file must be located in <em>handlers</em> directory.</p>
+<pre><code>mkdir handlers
+</code></pre>
+<p>Let's create a simple 'Hello World" handler by creating a handler file called <em>handlers/helloWorldHandler.js</em> with the following contents:</p>
+<pre><code>module.exports = function helloWorldHandler(event)
+{
+    event.response.body = "Hello, World";
+};
+</code></pre>
+<p>In this handler, we simply set the response body to "Hello, World".</p>
+<p>Then, update the config.yaml file to use our new handler.</p>
+<pre><code>api:
+  events:
+    - name: ""
+      policies:
+      - helloWorldHandler
+</code></pre>
+<p>Let's run configurapi:</p>
+<pre><code>configurapi-runner-self -p 8080
+</code></pre>
+<p>and test it:</p>
+<pre><code>curl http://localhost:8080/
+Hello, World
+</code></pre>
+<h2 id="response">Response</h2>
+<p>So far, you have learned how to set the content of a response.  </p>
+<p>Each event has a response.  A handler processes an incoming event and generates an appropiate response for the caller.  </p>
+<p>Configurapi provides four types of responses -- <em>Response</em>, <em>JsonResponse</em>, <em>ListResponse</em>, and <em>ErrorResponse</em></p>
+<p><a name="Response"></a>
+&nbsp;</p>
+<h3 id="response_1">Response</h3>
+<p><strong>Package</strong>: <a href="https://www.npmjs.com/package/configurapi">configurapi</a></p>
+<p>A raw response object.  This is the default type of response that is initialized when an event is created.</p>
+<p><strong>Constructor Parameters</strong></p>
+<ul>
+<li>statusCode: <em>number</em> - The request's status code. (Default: 200)</li>
+<li>body: <em>any</em> - The request's body.</li>
+<li>headers: <em>{}</em> Key-value pairs representing the response's handers. (Default: {})</li>
+</ul>
+<p><strong>Properties</strong></p>
+<ul>
+<li>body: <em>string</em> - The response's body. </li>
+<li>statusCode: <em>number</em> - The response's status code.</li>
+<li>headers: <em>object</em> - Key-value pairs representing the response's handers. </li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>module.exports = function helloWorldHandler(event)
+{
+    event.response.statusCode = 202;
+    event.response.body       = {hello: "World"};
+    event.response.headers    = {"Content-Type": "application/json"};
+};
+</code></pre>
+<p><a name="JsonResponse"></a>
+&nbsp;</p>
+<h3 id="jsonresponse">JsonResponse</h3>
+<p><strong>Package</strong>: <a href="https://www.npmjs.com/package/configurapi-handler-json">configurapi-handler-json</a></p>
+<p>A JSON response object.  This is the same as <a href="#Response">Response</a> above but it ensures that the Content-Type is appropiately set for JSON.</p>
+<p><strong>Constructor Parameters</strong></p>
+<ul>
+<li>body: <em>any</em> - The request's body.</li>
+<li>statusCode: <em>number</em> - The request's status code. (Default: 200)</li>
+<li>headers: <em>{}</em> Key-value pairs representing the response's handers. (Default: {})</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>const JsonResponse = require('configurapi-handler-json').JsonResponse;
+
+module.exports = function helloWorldHandler(event)
+{
+    event.response = new JsonResponse({hello: "world"});
+};
+</code></pre>
+<p><a name="ListResponse"></a>
+&nbsp;</p>
+<h3 id="listresponse">ListResponse</h3>
+<p><strong>Package</strong>: <a href="https://www.npmjs.com/package/configurapi-handler-json">configurapi-handler-json</a></p>
+<p>A response object representing a list of items. <em>start</em> and <em>total</em> are used for index-based paginations.</p>
+<p><strong>Constructor Parameters</strong></p>
+<ul>
+<li>collection: <em>array</em> - A list of items to include in this response.</li>
+<li>start: <em>number</em> - The start index of the items. (Default: 0)</li>
+<li>total: <em>number</em> - The total number of items in the entire collection. (Default: collection.length)</li>
+<li>statusCode: <em>number</em> - The request's status code. (Default: 200)</li>
+<li>headers: <em>{}</em> Key-value pairs representing the response's handers. (Default: {})</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>const ListResponse = require('configurapi-handler-json').ListResponse;
+
+module.exports = function helloWorldHandler(event)
+{
+        event.response = new ListResponse(["Hello", "World"]);
+};
+</code></pre>
+<p><a name="ErrorResponse"></a>
+&nbsp;</p>
+<h3 id="errorresponse">ErrorResponse</h3>
+<p><strong>Package</strong>: <a href="https://www.npmjs.com/package/configurapi">configurapi</a></p>
+<p>A response object representing an error. This type of response is returned when an error occurs in configurapi. </p>
+<p><strong>Constructor Parameters</strong></p>
+<ul>
+<li>error: <em>string</em> - The error message.</li>
+<li>statusCode: <em>number</em> - The request's status code. (Default: 500)</li>
+<li>details: <em>string</em> The error details such as a stack trace. (Default: '')</li>
+</ul>
+<p><strong>Example</strong></p>
+<pre><code>const ErrorResponse = require('configurapi').ErrorResponse;
+
+module.exports = function helloWorldHandler(event)
+{
+        try
+        {
+                throw new Error("Could not say hello!");
+        }
+        catch(e)
+        {
+                event.response = new ErrorResponse(e);
+        }
+};
+</code></pre>
+<h2 id="synchronous-handlers">Synchronous handlers</h2>
+<p>Synchronous handlers are handlers that return responses synchronously.  The following handler shows an example of a synchromous handler that returns a simple sum result synchronously.</p>
+<pre><code>    module.exports = function addHandler(value1, value2)
+    {
+        event.response.body = value1 + value2;
+    };
+</code></pre>
+
+<p>A synchronous handler is the simplest form of a handler.  However, it does not support a callback, a promise, or async/await.  In that case, an asynchronous handler must be used instead.</p>
+<h2 id="asynchronous-handlers">Asynchronous handlers</h2>
+<p>Asynchronous handlers are handlers that support asynchronous programming paradigm.  In asynchronous handlers, callbacks, promises, and async/await can be used to improve performance of the application. </p>
+<h3 id="callback">Callback</h3>
+<p>For a handler that uses a callback,  <strong>this.continue()</strong> or <strong>this.complete()</strong> must be called to indicate the completion of the handler. The only difference between <strong>this.continue()</strong> and <strong>this.complete()</strong> is <strong>this.continue()</strong> allows subsequent handlers to be processed while <strong>this.complete()</strong> indicates the completion of the entire request and returns the response back to the caller immediately.</p>
+<p>The following example shows how <strong>this.continue()</strong> and <strong>this.complete()</strong> could be used to indicate the completion of a handler using a callback.</p>
+<pre><code>const ErrorResponse = require('configurapi').ErrorResponse;
+
+function divide(value1, value2, callback)
+{
+    if(value2 == 0)
+    {
+        callback(new Error("Divide by zero"));
+    }
+    else
+    {
+        callback(undefined, value1/value2);
+    }
+}
+
+module.exports = function divideCallbackHandler(event, value1, value2)
+{
+    divide(value1, value2, (error, result) =&gt; {
+
+            if(error)
+            {
+                event.response = new ErrorResponse(error);
+                this.complete();
+            }
+            else
+            {
+                event.response.body = result.toString();
+                this.continue();
+            }
+    });
+};
+</code></pre>
+<h3 id="promise">Promise</h3>
+<p>A handler can return a promise.  Calling the promise's <strong>resolve()</strong> and <strong>reject()</strong> normally to indicate the completion of the handler's execution.</p>
+<p>The following is an example of a handler that returns a promise.</p>
+<pre><code>    module.exports = function dividePromiseHandler(event, value1, value2)
+    {
+        return new Promise((resolve, reject) =&gt; {
+
+            if(value2 === 0)
+            {
+                reject(new Error(&quot;Divide by zero&quot;));
+            }
+            else
+            {
+                event.response.body = (value1 / value2).toString();
+                resolve();
+            }
+        });
+    };
+</code></pre>
+
+<h3 id="asyncawait">Async/Await</h3>
+<pre><code>    async function addAsync(value1, value2)
+    {
+        return new Promise((resolve, reject) =&gt; {
+            setTimeout(() =&gt; resolve(value1+value2), 10);
+        };
+    }
+
+    module.exports = async function addHandler(event, value1, value2)
+    {
+        let result = await addAsync(value1, value2);
+        event.response.body = result.toString();
+    };
+
+</code></pre>
+                
+                  
+                
+              
+              
+                
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../standard/" title="Standard Handlers" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Standard Handlers
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../error/" title="Error Handling" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Error Handling
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="http://www.mkdocs.org" title="MkDocs">MkDocs</a>
+        and
+        <a href="http://squidfunk.github.io/mkdocs-material/" title="Material for MkDocs">
+          Material for MkDocs</a>
+      </div>
+      
+        
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application-6b599127bc.js"></script>
+      <script>app.initialize({url:{base:"../.."}})</script>
+      
+    
+    
+      
+    
+  </body>
+</html>

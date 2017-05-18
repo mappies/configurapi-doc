@@ -2,7 +2,7 @@
     "docs": [
         {
             "location": "/", 
-            "text": "Welcome to Configurapi\n\n\nConfigurapi is a configurable, event-driven API framework for rapid API developments.\n\n\nInstall\n\n\nnpm install -g configurapi-handler-http configurapi-runner-self\n\n\nConfigure\n\n\nConfig.yaml\n\n\nimport:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi ${hello}!\n\n\n\nRun\n\n\n./configurapi-runner-self\n\n\nTest\n\n\n$ curl http://localhost:8080/v1/hello/world\n\nHi world!\n\n\n\n\n\nLearn more\n\n\nWant to learn more?  Check out \nGetting Started", 
+            "text": "Welcome to Configurapi\n\n\nConfigurapi is a configurable, event-driven API framework for rapid API developments.\n\n\nInstall\n\n\nnpm install -g configurapi-handler-http configurapi-runner-self\n\n\nConfigure\n\n\nConfig.yaml\n\n\nimport:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi $(hello)!\n\n\n\nRun\n\n\n./configurapi-runner-self\n\n\nTest\n\n\n$ curl http://localhost:8080/v1/hello/world\n\nHi world!\n\n\n\n\n\nLearn more\n\n\nWant to learn more?  Check out \nGetting Started", 
             "title": "Home"
         }, 
         {
@@ -17,7 +17,7 @@
         }, 
         {
             "location": "/#configure", 
-            "text": "Config.yaml  import:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi ${hello}!", 
+            "text": "Config.yaml  import:\n  - configurapi-handler-http\napi:\n  events:\n    - name: get_v1_hello\n      policies:\n      - setResponseHandler:\n        - 200\n        - Hi $(hello)!", 
             "title": "Configure"
         }, 
         {
@@ -37,7 +37,7 @@
         }, 
         {
             "location": "/start/", 
-            "text": "Getting Started\n\n\nOverview\n\n\nInstallation\n\n\nConfig file\n\n\nYour first API route\n\n\nGet data from request payloads\n\n\nReturn responses\n\n\nError handling\n\n\nWhat's next?", 
+            "text": "Getting Started\n\n\nOverview\n\n\nConfigurapi is a configuration-driven, event-based API framework that allows developers to deliver API quicky.  In this short tutorial, we will create a simple ping API that echos back some data.\n\n\nCreate a project\n\n\nFirst we create a directory for our project.\n\n\nmkdir ping-api\ncd ping-api\n\n\n\nInstallation\n\n\nA configurapi application needs to a runner to run them.  There are many runners available.  You can see its full list on the \nRunner\n page. In this example, we will create a self hosted node.js application, so we will use configurapi-runner-self package. \n\n\nnpm install -g configurapi-runner-self\n\n\n\nWe also want the API to be a JSON API, so we need to install configurapi-handler-json package as well.\n\n\nnpm install configurapi-handler-json\n\n\n\nConfig file\n\n\nSince configurapi is a configuration-driven framework, we need a configuration file.  Let's create one now.\n\n\ntouch config.yaml\n\n\n\nYour first API route\n\n\nOur simple ping API will have one POST route.  The route will recieve a json request and simply return a payload back. We can do all of that by updating the config.yaml as follows.\n\n\nimport:\n  - configurapi-handler-json\napi:\n  events:\n    - name: post_v1_ping\n      policies:\n      - setJsonResponseHandler:\n        - 200\n        - {pong: true}\n\n\n\nThe config file has two sections -- \nimport\n and \napi\n.  The \nimport\n section lists all packages we plan to use for the API.  It will import all event handlers defined in each package and make it available to use in the \napi\n section.\n\n\nThe \napi\n section defines events or routes the software is expected to handle.  In this example, we expose one route -- post_v1_ping -- which is basically an event name of POST /v1/ping.  You can learn more about URL to Event mapping on \nEvent\n page.\n\n\nThe \npolicies\n describes a chain of handlers we want to process all incoming requests to this route.  In this example, we want to return a JSON response { pong: true } back.\n\n\nRun it\n\n\nLet's run our first API route by running the following command on your shell.  \n\n\nconfigurapi-runner-self -p 8080\n\n\n\nThis will run our API on port 8080.  Let's call it.\n\n\ncurl http://localhost:8080/v1/ping -X POST\n\n\n\nThe API should response with\n\n\n{\"pong\":true}\n\n\n\nCongratulation, you have created an API without writing any codes!\n\n\nIf you encounter a problem, make sure that config.yaml is on your current working directory.\n\n\nGet data from request payloads\n\n\nSo far, our API is too simple as it always returns a static response.  In the real world, we often need to extract data from a request payload and manipulate it.  Let's change our API to return something more interesting by chaning the config to the following:\n\n\nimport:\n  - configurapi-handler-json\napi:\n  events:\n    - name: post_v1_ping\n      policies:\n      - setJsonResponseHandler:\n        - 200\n        - {pong: Hi $($event.payload.from)}\n\n\n\nWith the new config, we will extract the payload and retrieve a value of property \nfrom\n and return it as a response.\n\n\ncurl http://localhost:8080/v1/ping -X POST  -H \"Content-Type: application/json\" -X POST -d '{\"from\": \"some one\"}'\n\n\n\nWe should see the following response. \n\n\n{\"pong\":\"Hi some one\"}\n\n\n\nWhat's next?\n\n\nCongratulation!  You have completed a quick tutorial on how to use configurapi which should give you enough to understand the basic principal of a configuration driven API framework.\n\n\nSince configurapi is also an event-driven framework, we will expore \nEvent\n in more details next.", 
             "title": "Getting Started"
         }, 
         {
@@ -47,128 +47,273 @@
         }, 
         {
             "location": "/start/#overview", 
-            "text": "", 
+            "text": "Configurapi is a configuration-driven, event-based API framework that allows developers to deliver API quicky.  In this short tutorial, we will create a simple ping API that echos back some data.", 
             "title": "Overview"
         }, 
         {
+            "location": "/start/#create-a-project", 
+            "text": "First we create a directory for our project.  mkdir ping-api\ncd ping-api", 
+            "title": "Create a project"
+        }, 
+        {
             "location": "/start/#installation", 
-            "text": "", 
+            "text": "A configurapi application needs to a runner to run them.  There are many runners available.  You can see its full list on the  Runner  page. In this example, we will create a self hosted node.js application, so we will use configurapi-runner-self package.   npm install -g configurapi-runner-self  We also want the API to be a JSON API, so we need to install configurapi-handler-json package as well.  npm install configurapi-handler-json", 
             "title": "Installation"
         }, 
         {
             "location": "/start/#config-file", 
-            "text": "", 
+            "text": "Since configurapi is a configuration-driven framework, we need a configuration file.  Let's create one now.  touch config.yaml", 
             "title": "Config file"
         }, 
         {
             "location": "/start/#your-first-api-route", 
-            "text": "", 
+            "text": "Our simple ping API will have one POST route.  The route will recieve a json request and simply return a payload back. We can do all of that by updating the config.yaml as follows.  import:\n  - configurapi-handler-json\napi:\n  events:\n    - name: post_v1_ping\n      policies:\n      - setJsonResponseHandler:\n        - 200\n        - {pong: true}  The config file has two sections --  import  and  api .  The  import  section lists all packages we plan to use for the API.  It will import all event handlers defined in each package and make it available to use in the  api  section.  The  api  section defines events or routes the software is expected to handle.  In this example, we expose one route -- post_v1_ping -- which is basically an event name of POST /v1/ping.  You can learn more about URL to Event mapping on  Event  page.  The  policies  describes a chain of handlers we want to process all incoming requests to this route.  In this example, we want to return a JSON response { pong: true } back.", 
             "title": "Your first API route"
         }, 
         {
+            "location": "/start/#run-it", 
+            "text": "Let's run our first API route by running the following command on your shell.    configurapi-runner-self -p 8080  This will run our API on port 8080.  Let's call it.  curl http://localhost:8080/v1/ping -X POST  The API should response with  {\"pong\":true}  Congratulation, you have created an API without writing any codes!  If you encounter a problem, make sure that config.yaml is on your current working directory.", 
+            "title": "Run it"
+        }, 
+        {
             "location": "/start/#get-data-from-request-payloads", 
-            "text": "", 
+            "text": "So far, our API is too simple as it always returns a static response.  In the real world, we often need to extract data from a request payload and manipulate it.  Let's change our API to return something more interesting by chaning the config to the following:  import:\n  - configurapi-handler-json\napi:\n  events:\n    - name: post_v1_ping\n      policies:\n      - setJsonResponseHandler:\n        - 200\n        - {pong: Hi $($event.payload.from)}  With the new config, we will extract the payload and retrieve a value of property  from  and return it as a response.  curl http://localhost:8080/v1/ping -X POST  -H \"Content-Type: application/json\" -X POST -d '{\"from\": \"some one\"}'  We should see the following response.   {\"pong\":\"Hi some one\"}", 
             "title": "Get data from request payloads"
         }, 
         {
-            "location": "/start/#return-responses", 
-            "text": "", 
-            "title": "Return responses"
-        }, 
-        {
-            "location": "/start/#error-handling", 
-            "text": "", 
-            "title": "Error handling"
-        }, 
-        {
             "location": "/start/#whats-next", 
-            "text": "", 
+            "text": "Congratulation!  You have completed a quick tutorial on how to use configurapi which should give you enough to understand the basic principal of a configuration driven API framework.  Since configurapi is also an event-driven framework, we will expore  Event  in more details next.", 
             "title": "What's next?"
         }, 
         {
-            "location": "/standard_handlers/", 
-            "text": "Standard Handlers\n\n\nUsing standard handlers\n\n\nHTTP\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-http\n\n\nSetResponseBodyHandler\n\n\nSetResponseHandler\n\n\nSetResponseHeaderHandler\n\n\nSetResponseStatusCodeHandler\n\n\nJSON\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-json\n\n\nSetJsonResponseHandler\n\n\nValidateJsonRequestHandler", 
+            "location": "/event/", 
+            "text": "Event\n\n\nSince Configurapi is an event-based framework, an incoming request will be converted to an event.  In this section, we will discuss 4 important event data -- name, parameters, payload, and response.\n\n\nEvent name\n\n\nAn event has a name.  In API applications, an event name is auto-generated from an API route using the following formular:\n\n\nmethod_version?_collection1_collection2_..._collectionN\n\n\n\nMethod\n\n\nA method is basically a HTTP method with an exception of GET which could be either 'get' or 'list' depending on its context.\n\n\nExample:\n\n\n\n\n\n\n\n\nHTTP Request\n\n\nMethod\n\n\n\n\n\n\n\n\n\n\nGET /users\n\n\nlist\n\n\n\n\n\n\nGET /users/{id}\n\n\nget\n\n\n\n\n\n\nPOST /users\n\n\npost\n\n\n\n\n\n\nPUT /users\n\n\nput\n\n\n\n\n\n\nPATCH /users\n\n\npatch\n\n\n\n\n\n\nDELETE /delete\n\n\ndelete\n\n\n\n\n\n\n\n\nVersion\n\n\nAPI Versioning is optional.  If exists, it must be at the left most of the path and started with 'v' followed by digits.\n\n\nExamples: \n\n\n\n\n\n\n\n\nHTTP Request\n\n\nVersion\n\n\n\n\n\n\n\n\n\n\nPOST /users\n\n\n\n\n\n\n\n\nPOST /v1/users\n\n\nv1\n\n\n\n\n\n\nPOST /v2/users\n\n\nv2\n\n\n\n\n\n\nPOST /v250/users\n\n\nv250\n\n\n\n\n\n\n\n\nCollection\n\n\nA collection is a group of resources based on RESTful API design principal.  An API route may have zero or more collections. \n\n\nExamples: \n\n\n\n\n\n\n\n\nHTTP Request\n\n\nCollection(s)\n\n\n\n\n\n\n\n\n\n\nGET /\n\n\n\n\n\n\n\n\nGET /users\n\n\nusers\n\n\n\n\n\n\nGET /users/someone\n\n\nusers\n\n\n\n\n\n\nGET /users/someone/phones\n\n\nusers, phones\n\n\n\n\n\n\nGET /users/someone/phones/123\n\n\nusers, phones\n\n\n\n\n\n\nGET /users/someone/phones/123/tags\n\n\nusers, phones, tags\n\n\n\n\n\n\nGET /users/someone/phones/123/tags/home\n\n\nusers, phones, tags\n\n\n\n\n\n\n\n\nEvent Name Examples\n\n\nSo, with \nmethod\n, \nversion\n, and \ncollection\n, we can easily translate an HTTP request to an event name. The following table demonstrates examples of URL to event name translations.  Notice also how configurapi singularizes container names.\n\n\n\n\n\n\n\n\nHTTP Request\n\n\nEvent name\n\n\n\n\n\n\n\n\n\n\nGET /users\n\n\nlist_users\n\n\n\n\n\n\nGET /users/someone\n\n\nget_user\n\n\n\n\n\n\nGET /users/someone/phones\n\n\nlist_user_phones\n\n\n\n\n\n\nGET /users/someone/phones/123\n\n\nget_user_phone\n\n\n\n\n\n\nGET /users/someone/phones/123/tags\n\n\nlist_user_phone_tags\n\n\n\n\n\n\nGET /users/someone/phones/123/tags/home\n\n\nget_user_phone_tag\n\n\n\n\n\n\nGET /v1/users/someone\n\n\nget_v1_user\n\n\n\n\n\n\nGET /v1/users/someone/phones/123/tags/home\n\n\nget_v1_user_phone_tag\n\n\n\n\n\n\nPOST /v1/users/\n\n\npost_v1_user\n\n\n\n\n\n\nPUT /v1/users/someone\n\n\nput_v1_user\n\n\n\n\n\n\nPATCH /v2/users/someone/phones/123\n\n\npatch_v2_user_phone\n\n\n\n\n\n\nDELETE /users/someone/phones/123\n\n\ndelete_user_phone\n\n\n\n\n\n\n\n\nEvent Parameters\n\n\nAn event parameters are a key-value pair containing URL data that are not captured by its event name.  Examples of such data are containers' identifiers and query strings.  Here are some examples of event parameters. Notice also how configurapi singularizes parameter names.\n\n\n\n\n\n\n\n\nHTTP Request\n\n\nParameter(s)\n\n\n\n\n\n\n\n\n\n\nGET /users\n\n\n{}\n\n\n\n\n\n\nGET /users/someone\n\n\n{user: \"someone\"}\n\n\n\n\n\n\nGET /users/someone/phones\n\n\n{user: \"someone\"}\n\n\n\n\n\n\nGET /users/someone/phones/123\n\n\n{user: \"someone\", phone: \"123\"}\n\n\n\n\n\n\nGET /users/someone/phones/123/tags\n\n\n{user: \"someone\", phone: \"123\"}\n\n\n\n\n\n\nGET /users/someone/phones/1234/tags/home\n\n\n{user: \"someone\", phone: \"123\", tag: \"home\"}\n\n\n\n\n\n\nGET /users?q1=v1\nq2=v2\n\n\n{q1: \"v1\", q2: \"v2\"}\n\n\n\n\n\n\nGET /users/someone/phones?q1=v1\nq2=v2\n\n\n{user: \"someone\", q1: \"v1\", q2: \"v2\"}\n\n\n\n\n\n\n\n\nEvent Payload\n\n\nAn event payload is basically a serialized request's payload based on its specified content type.\n\n\n\n\n\n\n\n\nHTTP Request Payload\n\n\nHTTP Content-Type Header\n\n\nEvent Payload\n\n\n\n\n\n\n\n\n\n\nThis is a string.\n\n\nplain/text\n\n\n\"This is a string.\"\n\n\n\n\n\n\n{\"username\": \"someone\"}\n\n\nplain/text\n\n\n\"{\\\"username\\\": \\\"someone\\\"}\"\n\n\n\n\n\n\n{\"username\": \"someone\"}\n\n\napplication/json\n\n\n{username: \"someone\"}\n\n\n\n\n\n\n\n\nEvent Response\n\n\nAfter an event has been processed, a response should be returned to the caller.  We can set an event's response either through configurations (e.g. \nsetResponseHandler\n,  \nsetJsonResponseHandler\n) or through \ncoding\n.", 
+            "title": "Event"
+        }, 
+        {
+            "location": "/event/#event", 
+            "text": "Since Configurapi is an event-based framework, an incoming request will be converted to an event.  In this section, we will discuss 4 important event data -- name, parameters, payload, and response.", 
+            "title": "Event"
+        }, 
+        {
+            "location": "/event/#event-name", 
+            "text": "An event has a name.  In API applications, an event name is auto-generated from an API route using the following formular:  method_version?_collection1_collection2_..._collectionN", 
+            "title": "Event name"
+        }, 
+        {
+            "location": "/event/#method", 
+            "text": "A method is basically a HTTP method with an exception of GET which could be either 'get' or 'list' depending on its context.  Example:     HTTP Request  Method      GET /users  list    GET /users/{id}  get    POST /users  post    PUT /users  put    PATCH /users  patch    DELETE /delete  delete", 
+            "title": "Method"
+        }, 
+        {
+            "location": "/event/#version", 
+            "text": "API Versioning is optional.  If exists, it must be at the left most of the path and started with 'v' followed by digits.  Examples:      HTTP Request  Version      POST /users     POST /v1/users  v1    POST /v2/users  v2    POST /v250/users  v250", 
+            "title": "Version"
+        }, 
+        {
+            "location": "/event/#collection", 
+            "text": "A collection is a group of resources based on RESTful API design principal.  An API route may have zero or more collections.   Examples:      HTTP Request  Collection(s)      GET /     GET /users  users    GET /users/someone  users    GET /users/someone/phones  users, phones    GET /users/someone/phones/123  users, phones    GET /users/someone/phones/123/tags  users, phones, tags    GET /users/someone/phones/123/tags/home  users, phones, tags", 
+            "title": "Collection"
+        }, 
+        {
+            "location": "/event/#event-name-examples", 
+            "text": "So, with  method ,  version , and  collection , we can easily translate an HTTP request to an event name. The following table demonstrates examples of URL to event name translations.  Notice also how configurapi singularizes container names.     HTTP Request  Event name      GET /users  list_users    GET /users/someone  get_user    GET /users/someone/phones  list_user_phones    GET /users/someone/phones/123  get_user_phone    GET /users/someone/phones/123/tags  list_user_phone_tags    GET /users/someone/phones/123/tags/home  get_user_phone_tag    GET /v1/users/someone  get_v1_user    GET /v1/users/someone/phones/123/tags/home  get_v1_user_phone_tag    POST /v1/users/  post_v1_user    PUT /v1/users/someone  put_v1_user    PATCH /v2/users/someone/phones/123  patch_v2_user_phone    DELETE /users/someone/phones/123  delete_user_phone", 
+            "title": "Event Name Examples"
+        }, 
+        {
+            "location": "/event/#event-parameters", 
+            "text": "An event parameters are a key-value pair containing URL data that are not captured by its event name.  Examples of such data are containers' identifiers and query strings.  Here are some examples of event parameters. Notice also how configurapi singularizes parameter names.     HTTP Request  Parameter(s)      GET /users  {}    GET /users/someone  {user: \"someone\"}    GET /users/someone/phones  {user: \"someone\"}    GET /users/someone/phones/123  {user: \"someone\", phone: \"123\"}    GET /users/someone/phones/123/tags  {user: \"someone\", phone: \"123\"}    GET /users/someone/phones/1234/tags/home  {user: \"someone\", phone: \"123\", tag: \"home\"}    GET /users?q1=v1 q2=v2  {q1: \"v1\", q2: \"v2\"}    GET /users/someone/phones?q1=v1 q2=v2  {user: \"someone\", q1: \"v1\", q2: \"v2\"}", 
+            "title": "Event Parameters"
+        }, 
+        {
+            "location": "/event/#event-payload", 
+            "text": "An event payload is basically a serialized request's payload based on its specified content type.     HTTP Request Payload  HTTP Content-Type Header  Event Payload      This is a string.  plain/text  \"This is a string.\"    {\"username\": \"someone\"}  plain/text  \"{\\\"username\\\": \\\"someone\\\"}\"    {\"username\": \"someone\"}  application/json  {username: \"someone\"}", 
+            "title": "Event Payload"
+        }, 
+        {
+            "location": "/event/#event-response", 
+            "text": "After an event has been processed, a response should be returned to the caller.  We can set an event's response either through configurations (e.g.  setResponseHandler ,   setJsonResponseHandler ) or through  coding .", 
+            "title": "Event Response"
+        }, 
+        {
+            "location": "/handlers/standard/", 
+            "text": "Standard Handlers\n\n\nUsing standard handlers\n\n\nConfigurapi comes with standard handlers.  To use it, simply install the desired package using npm and reference it in the \nimport\n section of the application's configuration file. \n\n\nHTTP\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-http\n\n\n\n\n\n\nsetResponseBodyHandler\n\n\nSet the response's body of an event.\n\n\nParameters\n\n\n\n\nstring\n - Response body\n\n\n\n\nExample\n\n\n- setResponseBodyHandler:\n  - Hello world\n\n\n\n\n\n\n\nsetResponseHandler\n\n\nSet the response of an event.\n\n\nParameters\n\n\n\n\nnumber\n - Status code\n\n\nstring\n - Response body\n\n\nobject\n - A key-value pair representing headers (optional)\n\n\n\n\nExample\n\n\n- setResponseHandler:\n  - 200\n  - Hello world\n  - {Content-Type: plain/text, X-Header: value}\n\n\n\n\n\n\n\nsetResponseHeaderHandler\n\n\nSet response's headers.\n\n\nParameters\n\n\n\n\nobject\n - Header name\n\n\nstring\n - Header value\n\n\n\n\nExample\n\n\n- setResponseHeaderHandler:\n  - Content-Type\n  - plain/text\n\n\n\n\n\n\n\nsetResponseStatusCodeHandler\n\n\nSet response's status code.\n\n\nParameters\n\n\n\n\nnumber\n - Status code\n\n\n\n\nExample\n\n\n- setResponseStatusCodeHandler:\n  - 404\n\n\n\nJSON\n\n\nSource\n: \nGitHub\n\n\nPackage\n: \nconfigurapi-handler-json\n\n\n\n\n\n\nsetJsonResponseHandler\n\n\nSet the response of an event in JSON format.  The content-type will be set to application/json.\n\n\nParameters\n\n\n\n\nnumber\n - Status code\n\n\nstring\n - Response body\n\n\nobject\n - A key-value pair representing headers (optional)\n\n\n\n\nExample\n\n\n- setJsonResponseHandler:\n  - 200\n  - {hello: world}\n  - {Content-Type: plain/text, X-Header: value}\n\n\n\n\n\n\n\nvalidateJsonRequestHandler\n\n\nValidate incoming request using JSON schema. By default, the handler will look for a schema file at \nschemas/event_name.json\n\n\nParameters\n\n\n\n\nstring\n - \nemptyPayload\n if no request payloads are expected (optional)\n\n\n\n\nExample\n\n\n- validateJsonRequestHandler", 
             "title": "Standard Handlers"
         }, 
         {
-            "location": "/standard_handlers/#standard-handlers", 
+            "location": "/handlers/standard/#standard-handlers", 
             "text": "", 
             "title": "Standard Handlers"
         }, 
         {
-            "location": "/standard_handlers/#using-standard-handlers", 
-            "text": "", 
+            "location": "/handlers/standard/#using-standard-handlers", 
+            "text": "Configurapi comes with standard handlers.  To use it, simply install the desired package using npm and reference it in the  import  section of the application's configuration file.", 
             "title": "Using standard handlers"
         }, 
         {
-            "location": "/standard_handlers/#http", 
+            "location": "/handlers/standard/#http", 
             "text": "Source :  GitHub  Package :  configurapi-handler-http", 
             "title": "HTTP"
         }, 
         {
-            "location": "/standard_handlers/#setresponsebodyhandler", 
-            "text": "", 
-            "title": "SetResponseBodyHandler"
+            "location": "/handlers/standard/#setresponsebodyhandler", 
+            "text": "Set the response's body of an event.", 
+            "title": "setResponseBodyHandler"
         }, 
         {
-            "location": "/standard_handlers/#setresponsehandler", 
-            "text": "", 
-            "title": "SetResponseHandler"
+            "location": "/handlers/standard/#parameters", 
+            "text": "string  - Response body", 
+            "title": "Parameters"
         }, 
         {
-            "location": "/standard_handlers/#setresponseheaderhandler", 
-            "text": "", 
-            "title": "SetResponseHeaderHandler"
+            "location": "/handlers/standard/#example", 
+            "text": "- setResponseBodyHandler:\n  - Hello world", 
+            "title": "Example"
         }, 
         {
-            "location": "/standard_handlers/#setresponsestatuscodehandler", 
-            "text": "", 
-            "title": "SetResponseStatusCodeHandler"
+            "location": "/handlers/standard/#setresponsehandler", 
+            "text": "Set the response of an event.", 
+            "title": "setResponseHandler"
         }, 
         {
-            "location": "/standard_handlers/#json", 
+            "location": "/handlers/standard/#parameters_1", 
+            "text": "number  - Status code  string  - Response body  object  - A key-value pair representing headers (optional)", 
+            "title": "Parameters"
+        }, 
+        {
+            "location": "/handlers/standard/#example_1", 
+            "text": "- setResponseHandler:\n  - 200\n  - Hello world\n  - {Content-Type: plain/text, X-Header: value}", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/handlers/standard/#setresponseheaderhandler", 
+            "text": "Set response's headers.", 
+            "title": "setResponseHeaderHandler"
+        }, 
+        {
+            "location": "/handlers/standard/#parameters_2", 
+            "text": "object  - Header name  string  - Header value", 
+            "title": "Parameters"
+        }, 
+        {
+            "location": "/handlers/standard/#example_2", 
+            "text": "- setResponseHeaderHandler:\n  - Content-Type\n  - plain/text", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/handlers/standard/#setresponsestatuscodehandler", 
+            "text": "Set response's status code.", 
+            "title": "setResponseStatusCodeHandler"
+        }, 
+        {
+            "location": "/handlers/standard/#parameters_3", 
+            "text": "number  - Status code", 
+            "title": "Parameters"
+        }, 
+        {
+            "location": "/handlers/standard/#example_3", 
+            "text": "- setResponseStatusCodeHandler:\n  - 404", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/handlers/standard/#json", 
             "text": "Source :  GitHub  Package :  configurapi-handler-json", 
             "title": "JSON"
         }, 
         {
-            "location": "/standard_handlers/#setjsonresponsehandler", 
-            "text": "", 
-            "title": "SetJsonResponseHandler"
+            "location": "/handlers/standard/#setjsonresponsehandler", 
+            "text": "Set the response of an event in JSON format.  The content-type will be set to application/json.", 
+            "title": "setJsonResponseHandler"
         }, 
         {
-            "location": "/standard_handlers/#validatejsonrequesthandler", 
-            "text": "", 
-            "title": "ValidateJsonRequestHandler"
+            "location": "/handlers/standard/#parameters_4", 
+            "text": "number  - Status code  string  - Response body  object  - A key-value pair representing headers (optional)", 
+            "title": "Parameters"
         }, 
         {
-            "location": "/custom_handlers/", 
-            "text": "Adding your own handlers\n\n\nSynchronous handlers\n\n\nAsynchronous handlers\n\n\nPromise\n\n\nAsync/Await", 
+            "location": "/handlers/standard/#example_4", 
+            "text": "- setJsonResponseHandler:\n  - 200\n  - {hello: world}\n  - {Content-Type: plain/text, X-Header: value}", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/handlers/standard/#validatejsonrequesthandler", 
+            "text": "Validate incoming request using JSON schema. By default, the handler will look for a schema file at  schemas/event_name.json", 
+            "title": "validateJsonRequestHandler"
+        }, 
+        {
+            "location": "/handlers/standard/#parameters_5", 
+            "text": "string  -  emptyPayload  if no request payloads are expected (optional)", 
+            "title": "Parameters"
+        }, 
+        {
+            "location": "/handlers/standard/#example_5", 
+            "text": "- validateJsonRequestHandler", 
+            "title": "Example"
+        }, 
+        {
+            "location": "/handlers/custom/", 
+            "text": "You can add your own handlers to process complex logics.  In this section, we will learn how to add your own custom handlers.\n\n\nAdding your own handlers\n\n\nA handler is a function defined in a JavaScript or TypeScript file.  The file must be located in \nhandlers\n directory.\n\n\nmkdir handlers\n\n\n\nLet's create a simple 'Hello World\" handler by creating a handler file called \nhandlers/helloWorldHandler.js\n with the following contents:\n\n\nmodule.exports = function helloWorldHandler(event)\n{\n    event.response.body = \"Hello, World\";\n};\n\n\n\nIn this handler, we simply set the response body to \"Hello, World\".\n\n\nThen, update the config.yaml file to use our new handler.\n\n\napi:\n  events:\n    - name: \"\"\n      policies:\n      - helloWorldHandler\n\n\n\nLet's run configurapi:\n\n\nconfigurapi-runner-self -p 8080\n\n\n\nand test it:\n\n\ncurl http://localhost:8080/\nHello, World\n\n\n\nResponse\n\n\nSo far, you have learned how to set the content of a response.  \n\n\nEach event has a response.  A handler processes an incoming event and generates an appropiate response for the caller.  \n\n\nConfigurapi provides four types of responses -- \nResponse\n, \nJsonResponse\n, \nListResponse\n, and \nErrorResponse\n\n\n\n\n\n\nResponse\n\n\nPackage\n: \nconfigurapi\n\n\nA raw response object.  This is the default type of response that is initialized when an event is created.\n\n\nConstructor Parameters\n\n\n\n\nstatusCode: \nnumber\n - The request's status code. (Default: 200)\n\n\nbody: \nany\n - The request's body.\n\n\nheaders: \n{}\n Key-value pairs representing the response's handers. (Default: {})\n\n\n\n\nProperties\n\n\n\n\nbody: \nstring\n - The response's body. \n\n\nstatusCode: \nnumber\n - The response's status code.\n\n\nheaders: \nobject\n - Key-value pairs representing the response's handers. \n\n\n\n\nExample\n\n\nmodule.exports = function helloWorldHandler(event)\n{\n    event.response.statusCode = 202;\n    event.response.body       = {hello: \"World\"};\n    event.response.headers    = {\"Content-Type\": \"application/json\"};\n};\n\n\n\n\n\n\n\nJsonResponse\n\n\nPackage\n: \nconfigurapi-handler-json\n\n\nA JSON response object.  This is the same as \nResponse\n above but it ensures that the Content-Type is appropiately set for JSON.\n\n\nConstructor Parameters\n\n\n\n\nbody: \nany\n - The request's body.\n\n\nstatusCode: \nnumber\n - The request's status code. (Default: 200)\n\n\nheaders: \n{}\n Key-value pairs representing the response's handers. (Default: {})\n\n\n\n\nExample\n\n\nconst JsonResponse = require('configurapi-handler-json').JsonResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n    event.response = new JsonResponse({hello: \"world\"});\n};\n\n\n\n\n\n\n\nListResponse\n\n\nPackage\n: \nconfigurapi-handler-json\n\n\nA response object representing a list of items. \nstart\n and \ntotal\n are used for index-based paginations.\n\n\nConstructor Parameters\n\n\n\n\ncollection: \narray\n - A list of items to include in this response.\n\n\nstart: \nnumber\n - The start index of the items. (Default: 0)\n\n\ntotal: \nnumber\n - The total number of items in the entire collection. (Default: collection.length)\n\n\nstatusCode: \nnumber\n - The request's status code. (Default: 200)\n\n\nheaders: \n{}\n Key-value pairs representing the response's handers. (Default: {})\n\n\n\n\nExample\n\n\nconst ListResponse = require('configurapi-handler-json').ListResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n        event.response = new ListResponse([\"Hello\", \"World\"]);\n};\n\n\n\n\n\n\n\nErrorResponse\n\n\nPackage\n: \nconfigurapi\n\n\nA response object representing an error. This type of response is returned when an error occurs in configurapi. \n\n\nConstructor Parameters\n\n\n\n\nerror: \nstring\n - The error message.\n\n\nstatusCode: \nnumber\n - The request's status code. (Default: 500)\n\n\ndetails: \nstring\n The error details such as a stack trace. (Default: '')\n\n\n\n\nExample\n\n\nconst ErrorResponse = require('configurapi').ErrorResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n        try\n        {\n                throw new Error(\"Could not say hello!\");\n        }\n        catch(e)\n        {\n                event.response = new ErrorResponse(e);\n        }\n};\n\n\n\nSynchronous handlers\n\n\nSynchronous handlers are handlers that return responses synchronously.  The following handler shows an example of a synchromous handler that returns a simple sum result synchronously.\n\n\n    module.exports = function addHandler(value1, value2)\n    {\n        event.response.body = value1 + value2;\n    };\n\n\n\n\nA synchronous handler is the simplest form of a handler.  However, it does not support a callback, a promise, or async/await.  In that case, an asynchronous handler must be used instead.\n\n\nAsynchronous handlers\n\n\nAsynchronous handlers are handlers that support asynchronous programming paradigm.  In asynchronous handlers, callbacks, promises, and async/await can be used to improve performance of the application. \n\n\nCallback\n\n\nFor a handler that uses a callback,  \nthis.continue()\n or \nthis.complete()\n must be called to indicate the completion of the handler. The only difference between \nthis.continue()\n and \nthis.complete()\n is \nthis.continue()\n allows subsequent handlers to be processed while \nthis.complete()\n indicates the completion of the entire request and returns the response back to the caller immediately.\n\n\nThe following example shows how \nthis.continue()\n and \nthis.complete()\n could be used to indicate the completion of a handler using a callback.\n\n\nconst ErrorResponse = require('configurapi').ErrorResponse;\n\nfunction divide(value1, value2, callback)\n{\n    if(value2 == 0)\n    {\n        callback(new Error(\"Divide by zero\"));\n    }\n    else\n    {\n        callback(undefined, value1/value2);\n    }\n}\n\nmodule.exports = function divideCallbackHandler(event, value1, value2)\n{\n    divide(value1, value2, (error, result) =\n {\n\n            if(error)\n            {\n                event.response = new ErrorResponse(error);\n                this.complete();\n            }\n            else\n            {\n                event.response.body = result.toString();\n                this.continue();\n            }\n    });\n};\n\n\n\nPromise\n\n\nA handler can return a promise.  Calling the promise's \nresolve()\n and \nreject()\n normally to indicate the completion of the handler's execution.\n\n\nThe following is an example of a handler that returns a promise.\n\n\n    module.exports = function dividePromiseHandler(event, value1, value2)\n    {\n        return new Promise((resolve, reject) =\n {\n\n            if(value2 === 0)\n            {\n                reject(new Error(\nDivide by zero\n));\n            }\n            else\n            {\n                event.response.body = (value1 / value2).toString();\n                resolve();\n            }\n        });\n    };\n\n\n\n\nAsync/Await\n\n\n    async function addAsync(value1, value2)\n    {\n        return new Promise((resolve, reject) =\n {\n            setTimeout(() =\n resolve(value1+value2), 10);\n        };\n    }\n\n    module.exports = async function addHandler(event, value1, value2)\n    {\n        let result = await addAsync(value1, value2);\n        event.response.body = result.toString();\n    };", 
             "title": "Custom Handlers"
         }, 
         {
-            "location": "/custom_handlers/#adding-your-own-handlers", 
-            "text": "", 
+            "location": "/handlers/custom/#adding-your-own-handlers", 
+            "text": "A handler is a function defined in a JavaScript or TypeScript file.  The file must be located in  handlers  directory.  mkdir handlers  Let's create a simple 'Hello World\" handler by creating a handler file called  handlers/helloWorldHandler.js  with the following contents:  module.exports = function helloWorldHandler(event)\n{\n    event.response.body = \"Hello, World\";\n};  In this handler, we simply set the response body to \"Hello, World\".  Then, update the config.yaml file to use our new handler.  api:\n  events:\n    - name: \"\"\n      policies:\n      - helloWorldHandler  Let's run configurapi:  configurapi-runner-self -p 8080  and test it:  curl http://localhost:8080/\nHello, World", 
             "title": "Adding your own handlers"
         }, 
         {
-            "location": "/custom_handlers/#synchronous-handlers", 
-            "text": "", 
+            "location": "/handlers/custom/#response", 
+            "text": "So far, you have learned how to set the content of a response.    Each event has a response.  A handler processes an incoming event and generates an appropiate response for the caller.    Configurapi provides four types of responses --  Response ,  JsonResponse ,  ListResponse , and  ErrorResponse", 
+            "title": "Response"
+        }, 
+        {
+            "location": "/handlers/custom/#response_1", 
+            "text": "Package :  configurapi  A raw response object.  This is the default type of response that is initialized when an event is created.  Constructor Parameters   statusCode:  number  - The request's status code. (Default: 200)  body:  any  - The request's body.  headers:  {}  Key-value pairs representing the response's handers. (Default: {})   Properties   body:  string  - The response's body.   statusCode:  number  - The response's status code.  headers:  object  - Key-value pairs representing the response's handers.    Example  module.exports = function helloWorldHandler(event)\n{\n    event.response.statusCode = 202;\n    event.response.body       = {hello: \"World\"};\n    event.response.headers    = {\"Content-Type\": \"application/json\"};\n};", 
+            "title": "Response"
+        }, 
+        {
+            "location": "/handlers/custom/#jsonresponse", 
+            "text": "Package :  configurapi-handler-json  A JSON response object.  This is the same as  Response  above but it ensures that the Content-Type is appropiately set for JSON.  Constructor Parameters   body:  any  - The request's body.  statusCode:  number  - The request's status code. (Default: 200)  headers:  {}  Key-value pairs representing the response's handers. (Default: {})   Example  const JsonResponse = require('configurapi-handler-json').JsonResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n    event.response = new JsonResponse({hello: \"world\"});\n};", 
+            "title": "JsonResponse"
+        }, 
+        {
+            "location": "/handlers/custom/#listresponse", 
+            "text": "Package :  configurapi-handler-json  A response object representing a list of items.  start  and  total  are used for index-based paginations.  Constructor Parameters   collection:  array  - A list of items to include in this response.  start:  number  - The start index of the items. (Default: 0)  total:  number  - The total number of items in the entire collection. (Default: collection.length)  statusCode:  number  - The request's status code. (Default: 200)  headers:  {}  Key-value pairs representing the response's handers. (Default: {})   Example  const ListResponse = require('configurapi-handler-json').ListResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n        event.response = new ListResponse([\"Hello\", \"World\"]);\n};", 
+            "title": "ListResponse"
+        }, 
+        {
+            "location": "/handlers/custom/#errorresponse", 
+            "text": "Package :  configurapi  A response object representing an error. This type of response is returned when an error occurs in configurapi.   Constructor Parameters   error:  string  - The error message.  statusCode:  number  - The request's status code. (Default: 500)  details:  string  The error details such as a stack trace. (Default: '')   Example  const ErrorResponse = require('configurapi').ErrorResponse;\n\nmodule.exports = function helloWorldHandler(event)\n{\n        try\n        {\n                throw new Error(\"Could not say hello!\");\n        }\n        catch(e)\n        {\n                event.response = new ErrorResponse(e);\n        }\n};", 
+            "title": "ErrorResponse"
+        }, 
+        {
+            "location": "/handlers/custom/#synchronous-handlers", 
+            "text": "Synchronous handlers are handlers that return responses synchronously.  The following handler shows an example of a synchromous handler that returns a simple sum result synchronously.      module.exports = function addHandler(value1, value2)\n    {\n        event.response.body = value1 + value2;\n    };  A synchronous handler is the simplest form of a handler.  However, it does not support a callback, a promise, or async/await.  In that case, an asynchronous handler must be used instead.", 
             "title": "Synchronous handlers"
         }, 
         {
-            "location": "/custom_handlers/#asynchronous-handlers", 
-            "text": "", 
+            "location": "/handlers/custom/#asynchronous-handlers", 
+            "text": "Asynchronous handlers are handlers that support asynchronous programming paradigm.  In asynchronous handlers, callbacks, promises, and async/await can be used to improve performance of the application.", 
             "title": "Asynchronous handlers"
         }, 
         {
-            "location": "/custom_handlers/#promise", 
-            "text": "", 
+            "location": "/handlers/custom/#callback", 
+            "text": "For a handler that uses a callback,   this.continue()  or  this.complete()  must be called to indicate the completion of the handler. The only difference between  this.continue()  and  this.complete()  is  this.continue()  allows subsequent handlers to be processed while  this.complete()  indicates the completion of the entire request and returns the response back to the caller immediately.  The following example shows how  this.continue()  and  this.complete()  could be used to indicate the completion of a handler using a callback.  const ErrorResponse = require('configurapi').ErrorResponse;\n\nfunction divide(value1, value2, callback)\n{\n    if(value2 == 0)\n    {\n        callback(new Error(\"Divide by zero\"));\n    }\n    else\n    {\n        callback(undefined, value1/value2);\n    }\n}\n\nmodule.exports = function divideCallbackHandler(event, value1, value2)\n{\n    divide(value1, value2, (error, result) =  {\n\n            if(error)\n            {\n                event.response = new ErrorResponse(error);\n                this.complete();\n            }\n            else\n            {\n                event.response.body = result.toString();\n                this.continue();\n            }\n    });\n};", 
+            "title": "Callback"
+        }, 
+        {
+            "location": "/handlers/custom/#promise", 
+            "text": "A handler can return a promise.  Calling the promise's  resolve()  and  reject()  normally to indicate the completion of the handler's execution.  The following is an example of a handler that returns a promise.      module.exports = function dividePromiseHandler(event, value1, value2)\n    {\n        return new Promise((resolve, reject) =  {\n\n            if(value2 === 0)\n            {\n                reject(new Error( Divide by zero ));\n            }\n            else\n            {\n                event.response.body = (value1 / value2).toString();\n                resolve();\n            }\n        });\n    };", 
             "title": "Promise"
         }, 
         {
-            "location": "/custom_handlers/#asyncawait", 
-            "text": "", 
+            "location": "/handlers/custom/#asyncawait", 
+            "text": "async function addAsync(value1, value2)\n    {\n        return new Promise((resolve, reject) =  {\n            setTimeout(() =  resolve(value1+value2), 10);\n        };\n    }\n\n    module.exports = async function addHandler(event, value1, value2)\n    {\n        let result = await addAsync(value1, value2);\n        event.response.body = result.toString();\n    };", 
             "title": "Async/Await"
+        }, 
+        {
+            "location": "/error/", 
+            "text": "", 
+            "title": "Error Handling"
         }, 
         {
             "location": "/runner/", 

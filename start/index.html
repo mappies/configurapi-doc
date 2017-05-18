@@ -183,6 +183,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#create-a-project" title="Create a project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" title="Installation" class="md-nav__link">
     Installation
   </a>
@@ -204,22 +211,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#run-it" title="Run it" class="md-nav__link">
+    Run it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#get-data-from-request-payloads" title="Get data from request payloads" class="md-nav__link">
     Get data from request payloads
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#return-responses" title="Return responses" class="md-nav__link">
-    Return responses
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" title="Error handling" class="md-nav__link">
-    Error handling
   </a>
   
 </li>
@@ -246,7 +246,19 @@
 
 
   <li class="md-nav__item">
-    <a href="../standard_handlers/" title="Standard Handlers" class="md-nav__link">
+    <a href="../event/" title="Event" class="md-nav__link">
+      Event
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../handlers/standard/" title="Standard Handlers" class="md-nav__link">
       Standard Handlers
     </a>
   </li>
@@ -258,8 +270,20 @@
 
 
   <li class="md-nav__item">
-    <a href="../custom_handlers/" title="Custom Handlers" class="md-nav__link">
+    <a href="../handlers/custom/" title="Custom Handlers" class="md-nav__link">
       Custom Handlers
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../error/" title="Error Handling" class="md-nav__link">
+      Error Handling
     </a>
   </li>
 
@@ -304,6 +328,13 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#create-a-project" title="Create a project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#installation" title="Installation" class="md-nav__link">
     Installation
   </a>
@@ -325,22 +356,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#run-it" title="Run it" class="md-nav__link">
+    Run it
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#get-data-from-request-payloads" title="Get data from request payloads" class="md-nav__link">
     Get data from request payloads
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#return-responses" title="Return responses" class="md-nav__link">
-    Return responses
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#error-handling" title="Error handling" class="md-nav__link">
-    Error handling
   </a>
   
 </li>
@@ -369,13 +393,71 @@
                 
                 <h1 id="getting-started">Getting Started</h1>
 <h2 id="overview">Overview</h2>
+<p>Configurapi is a configuration-driven, event-based API framework that allows developers to deliver API quicky.  In this short tutorial, we will create a simple ping API that echos back some data.</p>
+<h2 id="create-a-project">Create a project</h2>
+<p>First we create a directory for our project.</p>
+<pre><code>mkdir ping-api
+cd ping-api
+</code></pre>
 <h2 id="installation">Installation</h2>
+<p>A configurapi application needs to a runner to run them.  There are many runners available.  You can see its full list on the <a href="../runner">Runner</a> page. In this example, we will create a self hosted node.js application, so we will use configurapi-runner-self package. </p>
+<pre><code>npm install -g configurapi-runner-self
+</code></pre>
+<p>We also want the API to be a JSON API, so we need to install configurapi-handler-json package as well.</p>
+<pre><code>npm install configurapi-handler-json
+</code></pre>
 <h2 id="config-file">Config file</h2>
+<p>Since configurapi is a configuration-driven framework, we need a configuration file.  Let's create one now.</p>
+<pre><code>touch config.yaml
+</code></pre>
 <h2 id="your-first-api-route">Your first API route</h2>
+<p>Our simple ping API will have one POST route.  The route will recieve a json request and simply return a payload back. We can do all of that by updating the config.yaml as follows.</p>
+<pre><code>import:
+  - configurapi-handler-json
+api:
+  events:
+    - name: post_v1_ping
+      policies:
+      - setJsonResponseHandler:
+        - 200
+        - {pong: true}
+</code></pre>
+<p>The config file has two sections -- <em>import</em> and <em>api</em>.  The <em>import</em> section lists all packages we plan to use for the API.  It will import all event handlers defined in each package and make it available to use in the <em>api</em> section.</p>
+<p>The <em>api</em> section defines events or routes the software is expected to handle.  In this example, we expose one route -- post_v1_ping -- which is basically an event name of POST /v1/ping.  You can learn more about URL to Event mapping on <a href="../event">Event</a> page.</p>
+<p>The <em>policies</em> describes a chain of handlers we want to process all incoming requests to this route.  In this example, we want to return a JSON response { pong: true } back.</p>
+<h2 id="run-it">Run it</h2>
+<p>Let's run our first API route by running the following command on your shell.  </p>
+<pre><code>configurapi-runner-self -p 8080
+</code></pre>
+<p>This will run our API on port 8080.  Let's call it.</p>
+<pre><code>curl http://localhost:8080/v1/ping -X POST
+</code></pre>
+<p>The API should response with</p>
+<pre><code>{"pong":true}
+</code></pre>
+<p>Congratulation, you have created an API without writing any codes!</p>
+<p>If you encounter a problem, make sure that config.yaml is on your current working directory.</p>
 <h2 id="get-data-from-request-payloads">Get data from request payloads</h2>
-<h2 id="return-responses">Return responses</h2>
-<h2 id="error-handling">Error handling</h2>
+<p>So far, our API is too simple as it always returns a static response.  In the real world, we often need to extract data from a request payload and manipulate it.  Let's change our API to return something more interesting by chaning the config to the following:</p>
+<pre><code>import:
+  - configurapi-handler-json
+api:
+  events:
+    - name: post_v1_ping
+      policies:
+      - setJsonResponseHandler:
+        - 200
+        - {pong: Hi $($event.payload.from)}
+</code></pre>
+<p>With the new config, we will extract the payload and retrieve a value of property <em>from</em> and return it as a response.</p>
+<pre><code>curl http://localhost:8080/v1/ping -X POST  -H "Content-Type: application/json" -X POST -d '{"from": "some one"}'
+</code></pre>
+<p>We should see the following response. </p>
+<pre><code>{"pong":"Hi some one"}
+</code></pre>
 <h2 id="whats-next">What's next?</h2>
+<p>Congratulation!  You have completed a quick tutorial on how to use configurapi which should give you enough to understand the basic principal of a configuration driven API framework.</p>
+<p>Since configurapi is also an event-driven framework, we will expore <a href="../event">Event</a> in more details next.</p>
                 
                   
                 
@@ -409,13 +491,13 @@
           </a>
         
         
-          <a href="../standard_handlers/" title="Standard Handlers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../event/" title="Event" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Standard Handlers
+                Event
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
