@@ -1,0 +1,10 @@
+site_name: Configurapi
+pages:
+    - Home: index.md
+    - Getting Started: start.md
+    - Event: event.md
+    - Standard Handlers: handlers/standard.md
+    - Custom Handlers: handlers/custom.md
+    - Error Handling: error.md
+    - Runner: runner.md
+theme: material
